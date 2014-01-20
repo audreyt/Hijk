@@ -23,7 +23,7 @@ sub fetch {
             return (undef,0,undef,undef, Hijk::Error::READ_TIMEOUT) unless $nfound == 1;
         }
 
-        $nbytes = POSIX::read($fd, $buf, $block_size);
+        $nbytes = POSIX::read($fd, $buf,t $block_size);
 
         die "Failed to read http " .( $decapitated ? "body": "head" ). " from socket. errno = $!"
             unless defined $nbytes;
@@ -344,9 +344,9 @@ Users should keep this in mind when using Hijk.
 Noticed that the C<head> in the response is a HashRef rather then an ArrayRef.
 This makes it easier to retrieve specific header fields.
 
-We currently don't support server that does not return a http body without a
-Content-Length header, bodies B<MUST> have an accompanying Content-Length or we
-won't pick them up.
+We currently don't support servers that return a http body without an accompanying
+C<Content-Length> header; bodies B<MUST> have a C<Content-Length> or we won't pick
+them up.
 
 =head1 ERROR CODES
 
